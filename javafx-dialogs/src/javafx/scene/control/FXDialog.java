@@ -71,6 +71,8 @@ class FXDialog extends Stage
     private double mouseDragOffsetY = 0;
     protected Label titleLabel;
 
+    //---- Constructors -----------------------------------------------------------------
+
     FXDialog(String title) {
         this( title, null, false );
     }
@@ -281,6 +283,8 @@ class FXDialog extends Stage
         root.setCenter( pane );
     }
 
+    //---- Private API ------------------------------------------------------------------
+
 //    public void setIconifiable(boolean iconifiable) {
 //        minButton.setVisible(iconifiable);
 //    }
@@ -297,6 +301,8 @@ class FXDialog extends Stage
         button.setPrefSize( 17, 17 );
         return button;
     }
+
+    //---- Inner classes ----------------------------------------------------------------
 
     private static class RootPane extends StackPane
     {

@@ -381,7 +381,7 @@ class DialogTemplate<T>
                 {
                     @Override
                     public void handle(ActionEvent ae) {
-                        new Dialogs.ExceptionDialog( dialog, throwable ).show();
+                        new ExceptionDialog( dialog, throwable ).show();
                     }
                 } );
                 buttons.add( detailsBtn );
