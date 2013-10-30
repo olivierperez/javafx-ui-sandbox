@@ -60,7 +60,7 @@ class DialogTemplate<T>
     // Defines max dialog width.
     static final int DIALOG_WIDTH = 516;
 
-// According to the UI spec, the width of the main message text in the upper
+    // According to the UI spec, the width of the main message text in the upper
     // panel should be 426 pixels.
     private static int MAIN_TEXT_WIDTH = 400;
 
@@ -80,7 +80,7 @@ class DialogTemplate<T>
     private String mastheadString;
     private BorderPane mastheadPanel;
     private ImageView mastheadIcon;
-    private Dialogs.UITextArea mastheadTextArea;
+    private UITextArea mastheadTextArea;
     // center
     private Pane centerPanel;
     private String contentString = null;
@@ -234,7 +234,7 @@ class DialogTemplate<T>
         // Create topPanel's components.  UITextArea determines
         // the size of the dialog by defining the number of columns
         // based on font size.
-        mastheadTextArea = new Dialogs.UITextArea( MAIN_TEXT_WIDTH );
+        mastheadTextArea = new UITextArea( MAIN_TEXT_WIDTH );
         mastheadTextArea.getStyleClass().add( "masthead-label-1" );
         VBox mastheadVBox = new VBox();
         mastheadVBox.setAlignment( Pos.CENTER_LEFT );
@@ -303,7 +303,7 @@ class DialogTemplate<T>
     private Node createCenterContent() {
         if ( style == DialogStyle.SIMPLE || style == DialogStyle.ERROR ) {
             if ( contentString != null ) {
-                Dialogs.UITextArea ta = new Dialogs.UITextArea( contentString );
+                UITextArea ta = new UITextArea( contentString );
                 ta.getStyleClass().add( "center-content-area" );
                 ta.setAlignment( Pos.TOP_LEFT );
                 return ta;
@@ -446,7 +446,7 @@ class DialogTemplate<T>
         // then we should show only first message from infoStrs.
         // this is how it will work for security dialog...
         int textAreaWidth = 333;
-        Dialogs.UITextArea bulletText = new Dialogs.UITextArea( textAreaWidth );
+        UITextArea bulletText = new UITextArea( textAreaWidth );
         bulletText.getStyleClass().add( "bottom-text" );
         if ( ( alertStrs == null || alertStrs.length == 0 ) && infoStrs != null && infoStrs.length != 0 ) {
             // If there are no alerts, use first string from the infoStrs.
