@@ -324,55 +324,22 @@ class DialogTemplate<T>
                 return ta;
             }
         } else if ( style == DialogStyle.INPUT ) {
-            Control inputControl = null;
-            userInputResponse = new SimpleObjectProperty<T>();
+
+            Control inputControl;
+            userInputResponse = new SimpleObjectProperty<>();
+
             if ( inputChoices == null || inputChoices.isEmpty() ) {
-                // no input constraints, so use a TextField
-                final TextField textField = new TextField();
-                userInputResponse.bind( (ObservableValue<T>) textField.textProperty() );
-                textField.setOnAction( new EventHandler<ActionEvent>()
-                {
-                    @Override
-                    public void handle(ActionEvent t) {
-                        userResponse = DialogResponse.OK;
-                        hide();
-                    }
-                } );
-                if ( initialInputValue != null ) {
-                    textField.setText( initialInputValue.toString() );
-                }
-                inputControl = textField;
+                inputControl = createSimpleInputContent();
             } else {
-                // input method will be constrained to the given choices
-//                ChangeListener<T> changeListener = new ChangeListener<T>() {
-//                    @Override public void changed(ObservableValue<? extends T> ov, T t, T t1) {
-//                        userInputResponse = t1;
-//                    }
-//                };
-                if ( inputChoices.size() > 10 ) {
-                    // use ComboBox
-                    ComboBox<T> comboBox = new ComboBox<T>();
-                    comboBox.getItems().addAll( inputChoices );
-                    comboBox.getSelectionModel().select( initialInputValue );
-                    userInputResponse.bind( comboBox.valueProperty() );
-                    //                        comboBox.getSelectionModel().selectedItemProperty().addListener(changeListener);
-                    inputControl = comboBox;
-                } else {
-                    // use ChoiceBox
-                    ChoiceBox<T> choiceBox = new ChoiceBox<T>();
-                    choiceBox.getItems().addAll( inputChoices );
-                    choiceBox.getSelectionModel().select( initialInputValue );
-                    //                        choiceBox.getSelectionModel().selectedItemProperty().addListener(changeListener);
-                    userInputResponse.bind( choiceBox.valueProperty() );
-                    inputControl = choiceBox;
-                }
-                // !CHANGE END!
+                inputControl = createMultipleInputContent();
             }
+
             HBox hbox = new HBox( 10 );
             if ( contentString != null && !contentString.isEmpty() ) {
                 Label label = new Label( contentString );
                 hbox.getChildren().add( label );
             }
+
             if ( inputControl != null ) {
                 hbox.getChildren().add( inputControl );
             }
@@ -381,6 +348,50 @@ class DialogTemplate<T>
             return customContentPanel;
         }
         return null;
+    }
+
+    /**
+     * Create ComboBox or ChoiceBox when multiple input options are provided.
+     */
+    private Control createMultipleInputContent() {
+        Control inputControl;
+        if ( inputChoices.size() > 10 ) {
+            // use ComboBox
+            ComboBox<T> comboBox = new ComboBox<>();
+            comboBox.getItems().addAll( inputChoices );
+            comboBox.getSelectionModel().select( initialInputValue );
+            userInputResponse.bind( comboBox.valueProperty() );
+//            comboBox.getSelectionModel().selectedItemProperty().addListener(changeListener);
+            inputControl = comboBox;
+        } else {
+            // use ChoiceBox
+            ChoiceBox<T> choiceBox = new ChoiceBox<>();
+            choiceBox.getItems().addAll( inputChoices );
+            choiceBox.getSelectionModel().select( initialInputValue );
+//            choiceBox.getSelectionModel().selectedItemProperty().addListener(changeListener);
+            userInputResponse.bind( choiceBox.valueProperty() );
+            inputControl = choiceBox;
+        }
+        return inputControl;
+    }
+
+    /**
+     * Create simple TextField because no input constraints were given.
+     */
+    private Control createSimpleInputContent() {
+        final TextField textField = new TextField();
+        userInputResponse.bind( (ObservableValue<T>) textField.textProperty() );
+        textField.setOnAction( new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                userResponse = DialogResponse.OK;
+                hide();
+            }
+        } );
+        if ( initialInputValue != null ) {
+            textField.setText( initialInputValue.toString() );
+        }
+        return textField;
     }
 
     private List<Button> createButtons() {
@@ -392,8 +403,7 @@ class DialogTemplate<T>
                 // we've got an error dialog, which has 'OK' and 'Details..' buttons
                 buttons.addAll( createButton( okBtnStr, DialogResponse.OK, true, false ) );
                 Button detailsBtn = new Button( ( detailBtnStr == null ) ? "" : DialogResources.getMessage( detailBtnStr ) );
-                detailsBtn.setOnAction( new EventHandler<ActionEvent>()
-                {
+                detailsBtn.setOnAction( new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent ae) {
                         new ExceptionDialog( dialog, throwable ).show();
