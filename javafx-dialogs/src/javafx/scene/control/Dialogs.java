@@ -68,9 +68,8 @@ public class Dialogs
      * @return the response provided by the user.
      */
     public static DialogResponse showConfirmDialog(final Stage owner, final String message) {
-        return showConfirmDialog( owner,
-                message,
-                DialogType.CONFIRMATION.getDefaultMasthead() );
+
+        return showConfirmDialog( owner, message, DialogType.CONFIRMATION.getDefaultMasthead() );
     }
 
     /**
@@ -90,7 +89,7 @@ public class Dialogs
 
     /**
      * Brings up a dialog with the options <i>Yes</i>, <i>No</i> and <i>Cancel</i>;
-     * with the title "<i>Select an Option</i>".
+     * with the provided title.
      *
      * @param owner the {@link Stage} responsible for showing this dialog.
      * @param message the main message displayed by the dialog.
@@ -106,14 +105,13 @@ public class Dialogs
     }
 
     /**
-     * Brings up a dialog with the options <i>Yes</i>, <i>No</i> and <i>Cancel</i>;
-     * with the title "<i>Select an Option</i>".
+     * Brings up a dialog with customizable options and the provided title.
      *
      * @param owner the {@link Stage} responsible for showing this dialog.
      * @param message the main message displayed by the dialog.
      * @param masthead the masthead below the title bar.
      * @param title the title of the window.
-     * @param options a {@link DialogOptions} instance to customize the dialog.
+     * @param options a {@link DialogOptions} instance to customize the buttons of the dialog.
      * @return the response provided by the user.
      */
     public static DialogResponse showConfirmDialog(final Stage owner, final String message,
@@ -129,34 +127,45 @@ public class Dialogs
     //
     //-----------------------------------------------------------------------------------
 
+    /**
+     * Brings up a simple information dialog with the <i>Ok</i> option and
+     * the title "<i>Message</i>".
+     *
+     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param message the main message displayed by the dialog.
+     */
     public static void showInformationDialog(final Stage owner, final String message) {
-        showInformationDialog( owner,
-                message,
-                DialogType.INFORMATION.getDefaultMasthead() );
+
+        showInformationDialog( owner, message, DialogType.INFORMATION.getDefaultMasthead() );
     }
 
+    /**
+     * Brings up a simple information dialog with the <i>Ok</i> option and
+     * the title "<i>Message</i>".
+     *
+     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param message the main message displayed by the dialog.
+     * @param masthead the masthead below the title bar.
+     */
     public static void showInformationDialog(final Stage owner, final String message,
             final String masthead) {
-        showInformationDialog( owner,
-                message,
-                masthead,
-                DialogType.INFORMATION.getDefaultTitle() );
+
+        showInformationDialog( owner, message, masthead, DialogType.INFORMATION.getDefaultTitle() );
     }
 
-    /*
-     * Info message string displayed in the masthead
-     * Info icon 48x48 displayed in the masthead
-     * "OK" button at the bottom.
+    /**
+     * Brings up a simple information dialog with the <i>Ok</i> option and
+     * the provided title.
      *
-     * text and title strings are already translated strings.
+     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param message the main message displayed by the dialog.
+     * @param masthead the masthead below the title bar.
+     * @param title the title of the window.
      */
     public static void showInformationDialog(final Stage owner, final String message,
             final String masthead, final String title) {
-        showSimpleContentDialog( owner,
-                title,
-                masthead,
-                message,
-                DialogType.INFORMATION,
+
+        showSimpleContentDialog( owner, title, masthead, message, DialogType.INFORMATION,
                 DialogType.INFORMATION.getDefaultOptions() );
     }
 
