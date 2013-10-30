@@ -64,7 +64,7 @@ class DialogTemplate<T>
     // panel should be 426 pixels.
     private static int MAIN_TEXT_WIDTH = 400;
 
-    private Dialogs.FXDialog dialog;
+    private FXDialog dialog;
     private VBox contentPane;
     private DialogType dialogType = DialogType.INFORMATION;
     private final DialogOptions options;
@@ -108,7 +108,7 @@ class DialogTemplate<T>
     //---- Constructors -----------------------------------------------------------------
 
     DialogTemplate(Stage owner, String title, String masthead, DialogOptions options) {
-        this.dialog = new Dialogs.FXDialog( title, owner, true );
+        this.dialog = new FXDialog( title, owner, true );
         this.contentPane = new VBox();
         this.dialog.setContentPane( contentPane );
         this.mastheadString = masthead;
@@ -193,7 +193,7 @@ class DialogTemplate<T>
 
     //---- 'Public' API -----------------------------------------------------------------
 
-    public Dialogs.FXDialog getDialog() {
+    public FXDialog getDialog() {
         return dialog;
     }
 
