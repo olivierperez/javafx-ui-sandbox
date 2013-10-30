@@ -239,7 +239,7 @@ public class Dialogs
     //-----------------------------------------------------------------------------------
 
     /**
-     * Displays a Error dialog.
+     * Displays an Error dialog.
      *
      * @param owner Component to parent the dialog to.
      * @param message question to display in the middle part.
@@ -251,7 +251,7 @@ public class Dialogs
     }
 
     /**
-     * Displays a Error dialog.
+     * Displays an Error dialog.
      *
      * @param owner Component to parent the dialog to.
      * @param message question to display in the middle part.
@@ -265,7 +265,7 @@ public class Dialogs
     }
 
     /**
-     * Displays a Error dialog.
+     * Displays an Error dialog.
      *
      * @param owner Component to parent the dialog to.
      * @param message question to display in the middle part.
@@ -280,7 +280,7 @@ public class Dialogs
     }
 
     /**
-     * Displays a Error dialog.
+     * Displays an Error dialog.
      *
      * @param owner Component to parent the dialog to.
      * @param message question to display in the middle part.
@@ -297,7 +297,7 @@ public class Dialogs
     }
 
     /**
-     * Displays a Error dialog.
+     * Displays an Error dialog.
      *
      * @param owner Component to parent the dialog to.
      * @param message question to display in the middle part.
@@ -322,36 +322,39 @@ public class Dialogs
     //-----------------------------------------------------------------------------------
 
     public static String showInputDialog(final Stage owner, final String message) {
+
         return showInputDialog( owner, message, "Masthead" );
     }
 
-    public static String showInputDialog(final Stage owner, final String message,
-            final String masthead) {
+    public static String showInputDialog(final Stage owner, final String message, final String masthead) {
+
         return showInputDialog( owner, message, masthead, "Title" );
     }
 
-    public static String showInputDialog(final Stage owner, final String message,
-            final String masthead, final String title) {
+    public static String showInputDialog(final Stage owner, final String message, final String masthead,
+            final String title) {
+
         return showInputDialog( owner, message, masthead, title, null );
     }
 
-    public static String showInputDialog(final Stage owner, final String message,
-            final String masthead, final String title,
-            final String initialValue) {
+    public static String showInputDialog(final Stage owner, final String message, final String masthead,
+            final String title, final String initialValue) {
+
         return showInputDialog( owner, message, masthead, title, initialValue, Collections.<String>emptyList() );
     }
 
-    public static <T> T showInputDialog(final Stage owner, final String message,
-            final String masthead, final String title,
-            final T initialValue, final T... choices) {
+    public static <T> T showInputDialog(final Stage owner, final String message, final String masthead,
+            final String title, final T initialValue, final T... choices) {
+
         return showInputDialog( owner, message, masthead, title, initialValue, Arrays.asList( choices ) );
     }
 
-    public static <T> T showInputDialog(final Stage owner, final String message,
-            final String masthead, final String title,
-            final T initialValue, final List<T> choices) {
+    public static <T> T showInputDialog(final Stage owner, final String message, final String masthead,
+            final String title, final T initialValue, final List<T> choices) {
+
         DialogTemplate<T> template = new DialogTemplate<T>( owner, title, masthead, null );
         template.setInputContent( message, initialValue, choices );
+
         return showUserInputDialog( template );
     }
 

@@ -198,6 +198,7 @@ class FXDialog extends Stage
                 FXDialog.this.hide();
             }
         } );
+
         minButton = createWindowButton( "minimize" );
         minButton.setOnAction( new EventHandler() {
             @Override

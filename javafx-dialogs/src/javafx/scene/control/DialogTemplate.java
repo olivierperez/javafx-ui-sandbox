@@ -101,7 +101,7 @@ class DialogTemplate<T>
     // These are for security dialog only.
     private String[] alertStrs;
     private String[] infoStrs;
-    //Custom panel
+    // Custom panel
     private Pane customContentPanel;
     private Callback<Void, Void> callback;
 
@@ -134,6 +134,7 @@ class DialogTemplate<T>
         this.style = DialogStyle.SIMPLE;
         this.contentString = contentString;
         this.dialogType = dialogType == null ? DialogType.WARNING : dialogType;
+
         if ( infoString != null ) {
             String[] strs = { infoString };
             if ( useWarningIcon ) {
@@ -142,8 +143,10 @@ class DialogTemplate<T>
                 this.infoStrs = strs;
             }
         }
+
         contentPane.getChildren().add( createMasthead() );
         contentPane.getChildren().add( createCenterPanel() );
+
         Pane bottomPanel = createBottomPanel();
         if ( bottomPanel != null ) {
             contentPane.getChildren().add( bottomPanel );
@@ -156,8 +159,10 @@ class DialogTemplate<T>
         this.contentString = contentString;
         this.throwable = throwable;
         this.dialogType = DialogType.ERROR;
+
         contentPane.getChildren().add( createMasthead() );
         contentPane.getChildren().add( createCenterPanel() );
+
         Pane bottomPanel = createBottomPanel();
         if ( bottomPanel != null && bottomPanel.getChildren().size() > 0 ) {
             contentPane.getChildren().add( bottomPanel );
@@ -170,8 +175,10 @@ class DialogTemplate<T>
         this.contentString = message;
         this.initialInputValue = initialValue;
         this.inputChoices = choices;
+
         contentPane.getChildren().add( createMasthead() );
         contentPane.getChildren().add( createCenterPanel() );
+
         Pane bottomPanel = createBottomPanel();
         if ( bottomPanel != null ) {
             contentPane.getChildren().add( bottomPanel );
@@ -182,8 +189,10 @@ class DialogTemplate<T>
     void setCustomContent(Pane customContent) {
         this.style = DialogStyle.CUSTOM;
         this.customContentPanel = customContent;
+
         contentPane.getChildren().add( createMasthead() );
         contentPane.getChildren().add( createCenterPanel() );
+
         Pane bottomPanel = createBottomPanel();
         if ( bottomPanel != null ) {
             contentPane.getChildren().add( bottomPanel );
@@ -251,14 +260,17 @@ class DialogTemplate<T>
     private Pane createCenterPanel() {
         centerPanel = new VBox();
         centerPanel.getStyleClass().add( "center-panel" );
+
         BorderPane contentPanel = new BorderPane();
         contentPanel.getStyleClass().add( "center-content-panel" );
         VBox.setVgrow( contentPanel, Priority.ALWAYS );
+
         Node content = createCenterContent();
         if ( content != null ) {
             contentPanel.setCenter( content );
             contentPanel.setPadding( new Insets( 0, 0, 12, 0 ) );
         }
+
         FlowPane buttonsPanel = new FlowPane( 6, 0 ) {
             @Override
             protected void layoutChildren() {
@@ -288,14 +300,17 @@ class DialogTemplate<T>
             }
         };
         buttonsPanel.getStyleClass().add( "button-bar" );
-        // Create buttons from okBtnStr and cancelBtnStr strings.
+        // create buttons from okBtnStr and cancelBtnStr strings.
         buttonsPanel.getChildren().addAll( createButtons() );
+
         if ( contentPanel.getChildren().size() > 0 ) {
             centerPanel.getChildren().add( contentPanel );
         }
+
         BorderPane bottomPanel = new BorderPane();
         bottomPanel.getStyleClass().add( "center-bottom-panel" );
         bottomPanel.setRight( buttonsPanel );
+
         centerPanel.getChildren().add( bottomPanel );
         return centerPanel;
     }
