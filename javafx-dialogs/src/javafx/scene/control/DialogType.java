@@ -28,20 +28,20 @@ import javafx.scene.image.ImageView;
 
 public enum DialogType
 {
-    ERROR( DialogOptions.OK, "error48.image" ) {
-        @Override public String getDefaultMasthead() { return "Error"; }
-    },
-
     INFORMATION( DialogOptions.OK, "info48.image" ) {
         @Override public String getDefaultMasthead() { return "Message"; }
+    },
+
+    CONFIRMATION( DialogOptions.YES_NO_CANCEL, "confirm48.image" ) {
+        @Override public String getDefaultMasthead() { return "Select an Option"; }
     },
 
     WARNING( DialogOptions.OK, "warning48.image" ) {
         @Override public String getDefaultMasthead() { return "Warning"; }
     },
 
-    CONFIRMATION( DialogOptions.YES_NO_CANCEL, "confirm48.image" ) {
-        @Override public String getDefaultMasthead() { return "Select an Option"; }
+    ERROR( DialogOptions.OK, "error48.image" ) {
+        @Override public String getDefaultMasthead() { return "Error"; }
     },
 
     INPUT( DialogOptions.OK_CANCEL, "confirm48.image" ) {
