@@ -63,7 +63,7 @@ public class Dialogs
      * Brings up a dialog with the options <i>Yes</i>, <i>No</i> and <i>Cancel</i>;
      * with the title "<i>Select an Option</i>".
      *
-     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param owner Component to parent the dialog to.
      * @param message the main message displayed by the dialog.
      * @return the response provided by the user.
      */
@@ -76,7 +76,7 @@ public class Dialogs
      * Brings up a dialog with the options <i>Yes</i>, <i>No</i> and <i>Cancel</i>;
      * with the title "<i>Select an Option</i>".
      *
-     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param owner Component to parent the dialog to.
      * @param message the main message displayed by the dialog.
      * @param masthead the masthead below the title bar.
      * @return the response provided by the user.
@@ -91,10 +91,10 @@ public class Dialogs
      * Brings up a dialog with the options <i>Yes</i>, <i>No</i> and <i>Cancel</i>;
      * with the provided title.
      *
-     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param owner Component to parent the dialog to.
      * @param message the main message displayed by the dialog.
      * @param masthead the masthead below the title bar.
-     * @param title the title of the window.
+     * @param title dialog title.
      * @return the response provided by the user.
      */
     public static DialogResponse showConfirmDialog(final Stage owner, final String message,
@@ -107,10 +107,10 @@ public class Dialogs
     /**
      * Brings up a dialog with customizable options and the provided title.
      *
-     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param owner Component to parent the dialog to.
      * @param message the main message displayed by the dialog.
      * @param masthead the masthead below the title bar.
-     * @param title the title of the window.
+     * @param title dialog title.
      * @param options a {@link DialogOptions} instance to customize the buttons of the dialog.
      * @return the response provided by the user.
      */
@@ -131,7 +131,7 @@ public class Dialogs
      * Brings up a simple information dialog with the <i>Ok</i> option and
      * the title "<i>Message</i>".
      *
-     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param owner Component to parent the dialog to.
      * @param message the main message displayed by the dialog.
      */
     public static void showInformationDialog(final Stage owner, final String message) {
@@ -143,7 +143,7 @@ public class Dialogs
      * Brings up a simple information dialog with the <i>Ok</i> option and
      * the title "<i>Message</i>".
      *
-     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param owner Component to parent the dialog to.
      * @param message the main message displayed by the dialog.
      * @param masthead the masthead below the title bar.
      */
@@ -157,10 +157,10 @@ public class Dialogs
      * Brings up a simple information dialog with the <i>Ok</i> option and
      * the provided title.
      *
-     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param owner Component to parent the dialog to.
      * @param message the main message displayed by the dialog.
      * @param masthead the masthead below the title bar.
-     * @param title the title of the window.
+     * @param title dialog title.
      */
     public static void showInformationDialog(final Stage owner, final String message,
             final String masthead, final String title) {
@@ -176,48 +176,60 @@ public class Dialogs
     //-----------------------------------------------------------------------------------
 
     /**
-     * Displays warning icon instead of "Java" logo icon in the upper right
-     * corner of masthead. Has masthead and message that is displayed in the middle
-     * part of the dialog. No bullet is displayed.
+     * Displays a Warning dialog.
      *
-     * @param owner - Component to parent the dialog to
-     * @param appInfo - AppInfo object
-     * @param masthead - masthead in the top part of the dialog
-     * @param message - question to display in the middle part
-     * @param title - dialog title string from resource bundle
+     * @param owner Component to parent the dialog to.
+     * @param message question to display in the middle part.
+     * @return the response provided by the user.
      */
     public static DialogResponse showWarningDialog(final Stage owner, final String message) {
-        return showWarningDialog( owner,
-                message,
-                DialogType.WARNING.getDefaultMasthead() );
+
+        return showWarningDialog( owner, message, DialogType.WARNING.getDefaultMasthead() );
     }
 
+    /**
+     * Displays a Warning dialog.
+     *
+     * @param owner Component to parent the dialog to.
+     * @param message question to display in the middle part.
+     * @param masthead masthead in the top part of the dialog.
+     * @return the response provided by the user.
+     */
     public static DialogResponse showWarningDialog(final Stage owner, final String message,
             final String masthead) {
-        return showWarningDialog( owner,
-                message,
-                masthead,
-                DialogType.WARNING.getDefaultTitle() );
+
+        return showWarningDialog( owner, message, masthead, DialogType.WARNING.getDefaultTitle() );
     }
 
+    /**
+     * Displays a Warning dialog.
+     *
+     * @param owner Component to parent the dialog to.
+     * @param message question to display in the middle part.
+     * @param masthead masthead in the top part of the dialog.
+     * @param title dialog title.
+     * @return the response provided by the user.
+     */
     public static DialogResponse showWarningDialog(final Stage owner, final String message,
             final String masthead, final String title) {
-        return showWarningDialog( owner,
-                message,
-                masthead,
-                title,
-                DialogType.WARNING.getDefaultOptions() );
+
+        return showWarningDialog( owner, message, masthead, title, DialogType.WARNING.getDefaultOptions() );
     }
 
+    /**
+     * Displays a Warning dialog.
+     *
+     * @param owner Component to parent the dialog to.
+     * @param message question to display in the middle part.
+     * @param masthead masthead in the top part of the dialog.
+     * @param title dialog title string from resource bundle.
+     * @param options a {@link DialogOptions} instance to customize the buttons of the dialog.
+     * @return the response provided by the user.
+     */
     public static DialogResponse showWarningDialog(final Stage owner, final String message,
-            final String masthead, final String title,
-            DialogOptions options) {
-        return showSimpleContentDialog( owner,
-                title,
-                masthead,
-                message,
-                DialogType.WARNING,
-                options );
+            final String masthead, final String title, DialogOptions options) {
+
+        return showSimpleContentDialog( owner, title, masthead, message, DialogType.WARNING, options );
     }
 
     //-----------------------------------------------------------------------------------
@@ -226,43 +238,80 @@ public class Dialogs
     //
     //-----------------------------------------------------------------------------------
 
+    /**
+     * Displays a Error dialog.
+     *
+     * @param owner Component to parent the dialog to.
+     * @param message question to display in the middle part.
+     * @return the response provided by the user.
+     */
     public static DialogResponse showErrorDialog(final Stage owner, final String message) {
-        return showErrorDialog( owner,
-                message,
-                DialogType.ERROR.getDefaultMasthead() );
+
+        return showErrorDialog( owner, message, DialogType.ERROR.getDefaultMasthead() );
     }
 
+    /**
+     * Displays a Error dialog.
+     *
+     * @param owner Component to parent the dialog to.
+     * @param message question to display in the middle part.
+     * @param masthead masthead in the top part of the dialog.
+     * @return the response provided by the user.
+     */
     public static DialogResponse showErrorDialog(final Stage owner, final String message,
             final String masthead) {
-        return showErrorDialog( owner,
-                message,
-                masthead,
-                masthead );
+
+        return showErrorDialog( owner, message, masthead, masthead );
     }
 
+    /**
+     * Displays a Error dialog.
+     *
+     * @param owner Component to parent the dialog to.
+     * @param message question to display in the middle part.
+     * @param masthead masthead in the top part of the dialog.
+     * @param title dialog title string from resource bundle.
+     * @return the response provided by the user.
+     */
     public static DialogResponse showErrorDialog(final Stage owner, final String message,
             final String masthead, final String title) {
-        return showErrorDialog( owner,
-                message,
-                masthead,
-                title,
-                DialogType.ERROR.getDefaultOptions() );
+
+        return showErrorDialog( owner, message, masthead, title, DialogType.ERROR.getDefaultOptions() );
     }
 
+    /**
+     * Displays a Error dialog.
+     *
+     * @param owner Component to parent the dialog to.
+     * @param message question to display in the middle part.
+     * @param masthead masthead in the top part of the dialog.
+     * @param title dialog title string from resource bundle.
+     * @param options a {@link DialogOptions} instance to customize the buttons of the dialog.
+     * @return the response provided by the user.
+     */
     public static DialogResponse showErrorDialog(final Stage owner, final String message,
             final String masthead, final String title, DialogOptions options) {
-        return showSimpleContentDialog( owner,
-                title,
-                masthead,
-                message,
-                DialogType.ERROR,
+
+        return showSimpleContentDialog( owner, title, masthead, message, DialogType.ERROR,
                 options );
     }
 
+    /**
+     * Displays a Error dialog.
+     *
+     * @param owner Component to parent the dialog to.
+     * @param message question to display in the middle part.
+     * @param masthead masthead in the top part of the dialog.
+     * @param title dialog title string from resource bundle.
+     * @param throwable a Throwable associated with the dialog.
+     * @return the response provided by the user.
+     */
     public static DialogResponse showErrorDialog(final Stage owner, final String message,
             final String masthead, final String title, final Throwable throwable) {
+
         DialogTemplate template = new DialogTemplate( owner, title, masthead, null );
         template.setErrorContent( message, throwable );
+
         return showDialog( template );
     }
 
@@ -313,10 +362,13 @@ public class Dialogs
     //-----------------------------------------------------------------------------------
 
     // Provided Pane is inserted in the content panel. Provided callback is added to buttons' onAction handler.
-    public static <T> DialogResponse showCustomDialog(final Stage owner, final Pane customContentPanel, final String masthead, final String title, DialogOptions options, Callback<java.lang.Void, java.lang.Void> callback) {
-        DialogTemplate<T> template = new DialogTemplate<T>( owner, customContentPanel, title, masthead, options ); //DialogType.CUSTOM.defaultOptions);
+    public static <T> DialogResponse showCustomDialog(final Stage owner, final Pane customContentPanel,
+            final String masthead, final String title, DialogOptions options, Callback<Void, Void> callback) {
+
+        DialogTemplate<T> template = new DialogTemplate<T>( owner, customContentPanel, title, masthead, options );
         template.setCustomContent( customContentPanel );
         template.setCustomCallback( callback );
+
         return showCustomDialog( template );
     }
 
