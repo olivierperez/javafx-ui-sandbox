@@ -47,8 +47,7 @@ import static javafx.scene.control.DialogResponse.OK;
  */
 public class Dialogs
 {
-
-    //---- Constructors -----------------------------------------------------------------
+    //---- Constructor ------------------------------------------------------------------
 
     private Dialogs() {
         // no-op as we don't want people creating instances of this class
@@ -61,12 +60,12 @@ public class Dialogs
     //-----------------------------------------------------------------------------------
 
     /**
-     * Brings up a dialog with the options Yes, No and Cancel; with the title,
-     * <b>Select an Option</b>.
+     * Brings up a dialog with the options <i>Yes</i>, <i>No</i> and <i>Cancel</i>;
+     * with the title "<i>Select an Option</i>".
      *
-     * @param owner
-     * @param message
-     * @return
+     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param message the main message displayed by the dialog.
+     * @return the response provided by the user.
      */
     public static DialogResponse showConfirmDialog(final Stage owner, final String message) {
         return showConfirmDialog( owner,
@@ -74,31 +73,54 @@ public class Dialogs
                 DialogType.CONFIRMATION.getDefaultMasthead() );
     }
 
+    /**
+     * Brings up a dialog with the options <i>Yes</i>, <i>No</i> and <i>Cancel</i>;
+     * with the title "<i>Select an Option</i>".
+     *
+     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param message the main message displayed by the dialog.
+     * @param masthead the masthead below the title bar.
+     * @return the response provided by the user.
+     */
     public static DialogResponse showConfirmDialog(final Stage owner, final String message,
             final String masthead) {
-        return showConfirmDialog( owner,
-                message,
-                masthead,
-                DialogType.CONFIRMATION.getDefaultTitle() );
+
+        return showConfirmDialog( owner, message, masthead, DialogType.CONFIRMATION.getDefaultTitle() );
     }
 
+    /**
+     * Brings up a dialog with the options <i>Yes</i>, <i>No</i> and <i>Cancel</i>;
+     * with the title "<i>Select an Option</i>".
+     *
+     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param message the main message displayed by the dialog.
+     * @param masthead the masthead below the title bar.
+     * @param title the title of the window.
+     * @return the response provided by the user.
+     */
     public static DialogResponse showConfirmDialog(final Stage owner, final String message,
             final String masthead, final String title) {
-        return showConfirmDialog( owner,
-                message,
-                masthead,
-                title,
+
+        return showConfirmDialog( owner, message, masthead, title,
                 DialogType.CONFIRMATION.getDefaultOptions() );
     }
 
+    /**
+     * Brings up a dialog with the options <i>Yes</i>, <i>No</i> and <i>Cancel</i>;
+     * with the title "<i>Select an Option</i>".
+     *
+     * @param owner the {@link Stage} responsible for showing this dialog.
+     * @param message the main message displayed by the dialog.
+     * @param masthead the masthead below the title bar.
+     * @param title the title of the window.
+     * @param options a {@link DialogOptions} instance to customize the dialog.
+     * @return the response provided by the user.
+     */
     public static DialogResponse showConfirmDialog(final Stage owner, final String message,
             final String masthead, final String title, final DialogOptions options) {
-        return showSimpleContentDialog( owner,
-                title,
-                masthead,
-                message,
-                DialogType.CONFIRMATION,
-                options );
+
+        return showSimpleContentDialog( owner, title, masthead, message,
+                DialogType.CONFIRMATION, options );
     }
 
     //-----------------------------------------------------------------------------------
@@ -281,7 +303,7 @@ public class Dialogs
     //
     //-----------------------------------------------------------------------------------
 
-// Provided Pane is inserted in the content panel. Provided callback is added to buttons' onAction handler.
+    // Provided Pane is inserted in the content panel. Provided callback is added to buttons' onAction handler.
     public static <T> DialogResponse showCustomDialog(final Stage owner, final Pane customContentPanel, final String masthead, final String title, DialogOptions options, Callback<java.lang.Void, java.lang.Void> callback) {
         DialogTemplate<T> template = new DialogTemplate<T>( owner, customContentPanel, title, masthead, options ); //DialogType.CUSTOM.defaultOptions);
         template.setCustomContent( customContentPanel );
@@ -289,10 +311,19 @@ public class Dialogs
         return showCustomDialog( template );
     }
 
+    //-----------------------------------------------------------------------------------
+    //
+    // Private API
+    //
+    // These methods are responsible for the actual creation of the Dialog.
+    //-----------------------------------------------------------------------------------
+
     private static DialogResponse showSimpleContentDialog(final Stage owner, final String title,
             final String masthead, final String message, DialogType dialogType, final DialogOptions options) {
+
         DialogTemplate template = new DialogTemplate( owner, title, masthead, options );
         template.setSimpleContent( message, dialogType );
+
         return showDialog( template );
     }
 
@@ -301,14 +332,16 @@ public class Dialogs
             template.getDialog().centerOnScreen();
             template.show();
             return template.getResponse();
-        } catch ( Throwable e ) {
+        } catch ( Exception ex ) {
             return CLOSED;
         }
     }
 
     private static <T> T showUserInputDialog(DialogTemplate<T> template) {
+
         template.getDialog().centerOnScreen();
         template.show();
+
         if ( template.getResponse() == OK ) {
             return template.getInputResponse();
         } else {
@@ -317,12 +350,13 @@ public class Dialogs
     }
 
     private static DialogResponse showCustomDialog(DialogTemplate template) {
+
         try {
-            //template.options = DialogType.CUSTOM.defaultOptions;
+//            template.options = DialogType.CUSTOM.defaultOptions;
             template.getDialog().centerOnScreen();
             template.show();
             return template.getResponse();
-        } catch ( Throwable e ) {
+        } catch ( Exception ex ) {
             return CLOSED;
         }
 //        if (template.getResponse() == OK) {
