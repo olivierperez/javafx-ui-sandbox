@@ -8,7 +8,7 @@ import java.util.List;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.control.Dialogs.DialogOptions;
-import javafx.scene.control.Dialogs.DialogResponse;
+import javafx.scene.control.DialogResponse;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;

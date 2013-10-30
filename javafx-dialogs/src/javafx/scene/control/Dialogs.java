@@ -28,8 +28,8 @@ package javafx.scene.control;
 import static javafx.scene.control.Dialogs.DialogResources.getIcon;
 import static javafx.scene.control.Dialogs.DialogResources.getMessage;
 import static javafx.scene.control.Dialogs.DialogResources.getString;
-import static javafx.scene.control.Dialogs.DialogResponse.CLOSED;
-import static javafx.scene.control.Dialogs.DialogResponse.OK;
+import static javafx.scene.control.DialogResponse.CLOSED;
+import static javafx.scene.control.DialogResponse.OK;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -96,49 +96,6 @@ public class Dialogs {
 	// !CHANGE START! use a separate css file
 	private static final URL DIALOGS_CSS_URL = FXDialog.class.getResource("dialogs.css");
 	// !CHANGE END!
-    
-    
-    /***************************************************************************
-     *                                                                         *
-     * Public static support classes / enums                                   *
-     *                                                                         *
-     **************************************************************************/    
-    
-    /**
-     * An enumeration used to specify the response provided by the user when
-     * interacting with a dialog.
-     */
-    public static enum DialogResponse {
-        /**
-         * Used to represent that the user has selected the option corresponding 
-         * with YES.
-         */
-        YES,
-        
-        /**
-         * Used to represent that the user has selected the option corresponding 
-         * with NO.
-         */
-        NO,
-        
-        /**
-         * Used to represent that the user has selected the option corresponding 
-         * with CANCEL.
-         */
-        CANCEL,
-        
-        /**
-         * Used to represent that the user has selected the option corresponding 
-         * with OK.
-         */
-        OK,
-        
-        /**
-         * Used to represent that the user has selected the option corresponding 
-         * with CLOSED.
-         */
-        CLOSED
-    }
     
     /**
      * An enumeration used to specify which buttons to show to the user in a 
