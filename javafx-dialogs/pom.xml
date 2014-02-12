@@ -4,7 +4,7 @@
 
 	<groupId>javafx-ui-sandbox</groupId>
 	<artifactId>javafx-dialogs</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 
 	<name>JavaFX UI Sandbox Dialogs</name>
 	<description>JavaFX Dialogs are simple dialogs in the style of JOptionPane from Swing.</description>
