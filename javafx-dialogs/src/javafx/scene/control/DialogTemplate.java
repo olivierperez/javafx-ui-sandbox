@@ -54,7 +54,7 @@ class DialogTemplate<T>
 {
     private static enum DialogStyle
     {
-        SIMPLE, ERROR, INPUT, CUSTOM
+        SIMPLE, ERROR, INPUT, PASSWORD, CUSTOM
     }
 
     // Defines max dialog width.
@@ -175,6 +175,22 @@ class DialogTemplate<T>
         this.contentString = message;
         this.initialInputValue = initialValue;
         this.inputChoices = choices;
+
+        contentPane.getChildren().add( createMasthead() );
+        contentPane.getChildren().add( createCenterPanel() );
+
+        Pane bottomPanel = createBottomPanel();
+        if ( bottomPanel != null ) {
+            contentPane.getChildren().add( bottomPanel );
+        }
+        dialog.setResizable( false );
+    }
+
+    void setPasswordContent(final String message) {
+        this.style = DialogStyle.PASSWORD;
+        this.contentString = message;
+        this.initialInputValue = null;
+        this.inputChoices = null;
 
         contentPane.getChildren().add( createMasthead() );
         contentPane.getChildren().add( createCenterPanel() );
@@ -323,12 +339,14 @@ class DialogTemplate<T>
                 ta.setAlignment( Pos.TOP_LEFT );
                 return ta;
             }
-        } else if ( style == DialogStyle.INPUT ) {
+        } else if ( style == DialogStyle.INPUT || style == DialogStyle.PASSWORD ) {
 
             Control inputControl;
             userInputResponse = new SimpleObjectProperty<>();
 
-            if ( inputChoices == null || inputChoices.isEmpty() ) {
+            if (style == DialogStyle.PASSWORD) {
+                inputControl = createPasswordContent();
+            } else if ( inputChoices == null || inputChoices.isEmpty() ) {
                 inputControl = createSimpleInputContent();
             } else {
                 inputControl = createMultipleInputContent();
@@ -348,6 +366,25 @@ class DialogTemplate<T>
             return customContentPanel;
         }
         return null;
+    }
+
+    /**
+     * Create a PasswordField
+     * @return the PasswordField prepared
+     */
+    private PasswordField createPasswordContent() {
+
+        PasswordField passwordField = new PasswordField();
+        userInputResponse.bind((ObservableValue<T>) passwordField.textProperty());
+        passwordField.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent actionEvent) {
+                userResponse = DialogResponse.OK;
+                hide();
+            }
+        });
+
+        return passwordField;
     }
 
     /**

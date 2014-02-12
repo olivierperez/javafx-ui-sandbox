@@ -358,6 +358,13 @@ public class Dialogs
         return showUserInputDialog( template );
     }
 
+    public static String showPasswordDialog(final Stage owner, final String message, final String masthead, final String title) {
+        DialogTemplate<String> template = new DialogTemplate<>(owner, title, masthead, DialogOptions.OK);
+        template.setPasswordContent(message);
+
+        return showUserInputDialog(template);
+    }
+
     //-----------------------------------------------------------------------------------
     //
     // Custom Content Dialog
